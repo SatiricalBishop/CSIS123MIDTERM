@@ -48,6 +48,17 @@ const float TIPRATE1 = 0.2; //tip rate for 1 star
 const float TIPRATE2 = 0.15; //tip rate for 2 star
 const float TIPRATE3 = 0.1; //tip rate for 3 star
 
+//song lengths in seconds
+const int lengthOn = 171; //On The Road Again    
+const int lengthLife = 186; //Life is a Highway 
+const int lengthKing = 183; //King of the Road           
+const int lengthCantDrive = 255; //I Cant Drive 55              
+const int lengthEverywhere = 216; // Ive Been Everywhere      
+const int lengthShutUp = 243; // Shut Up and Drive          
+const int lengthAllNight = 177; // I drove all night             
+const int lengthRoadJack = 303; // Hit the Road Jack           
+const int lengthCountryRoadsTakeMeHome = 186; //Country Roads Take Me HOME!    
+const int lengthRoad = 177; // Road to Nowhere              
 
 int main() {
 	cout << setprecision(2) << fixed; // makes all outputs to two decimal points
