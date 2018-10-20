@@ -9,13 +9,13 @@ Create a program that guides the user through Murphyville and allows for them to
 #include <iostream>
 #include <string>
 #include <iomanip>
-#include <cstdlib> //fixes "system is ambigious error"
+#include <cstdlib> //fixes "system is ambigious error" sometimes
 #include <fstream>
 
 using namespace std;
 
 char staying;
-bool here;
+
 
 string day;
 bool weekend;
@@ -32,6 +32,7 @@ const float COSTSQUIRRELONSTICK = 5.00;
 
 int food; // what food is ordered
 int amtFood; // amt of food ordered
+int amtItems; // amt of different items
 int amtBiscuits; // amt of Biscuits ordered
 int amtCakes; // amt of pancakes ordered
 int amtDilloSteak; // amt of steak ordered
@@ -39,18 +40,31 @@ int amtSquirrelOnStick; // amt of squirrel ordered
 int stockDilloSteak = 5; // stock of steak left
 int stockSquirrelOnStick = 5; // stock of squirrel
 
+float subtotal;
+float total;
+int stars;
+
+const float TIP1 = 0.2; //tip for 1 star
+const float TIP2 = 0.15; //tip for 2 star
+const float TIP3 = 0.1; //tip for 3 star
+
+
 int main() {
+	cout << setprecision(2) << fixed; // makes all outputs to two decimal points
 	
 	//Welcome Screen
-	
-	do {
-
-		while (staying != 'y' || staying != 'Y' || staying != 'n' || staying != 'N') {
-			cout << "welcome to Murphyville are you staying?(y/n)" << endl;
+	do{
+		for(;;) { //infinite loop till if statement
+			cout << "WELCOME TO THE WONDERFUL BACKWARDS VILLE OF THE MURPHYVILLE! are you staying?(y/n)" << endl;
 			cin >> staying;
-
-			cout << "Please input y for yes or n for no" << endl;
+			if (staying != 'y' || staying != 'Y' || staying != 'n' || staying != 'N') { //checks for valid input
+				break;
+			}
 		}
+		
+		if (staying == 'n' || staying == 'N') 
+			break;
+
 
 		cout << "what day of the week are you visting?" << endl;
 		cin >> day;
@@ -59,12 +73,6 @@ int main() {
 		cin >> timeDay;
 
 		cout << "Where would you like to go?" << endl;
-
-		//Setting 'here' boolean
-		if (staying == 'y' || staying == 'y')
-			here = true;
-		else
-			here == false;
 
 		//Knowing AM or PM mostly because of requirements
 		if (timeDay >= 1200)
@@ -80,13 +88,14 @@ int main() {
 			weekend = false;
 
 		//Activity Selection
-		while () {
 			if (weekend) {
 				if (timeDay >= 700 && timeDay <= 2200) {
 					cout << "You can visit the cafe(c) or the souvenir shop(s), or just play with the juke box(j)" << endl;
+					cin >> activity;
 				}
 				else if (timeDay <= 2300 && timeDay >= 500) {
-					cout << "The cafe is open(c), and it has a juke box(j) ;)" << endl;
+					cout << "The cafe is open(c), and it has a juke box(j)" << endl;
+					cin >> activity;
 				}
 				else {
 					cout << "Sorry nothing is open in murphyville" << endl;
@@ -95,90 +104,129 @@ int main() {
 			else {
 				if (timeDay >= 800 && timeDay <= 2000) {
 					cout << "You can visit the cafe(c) or the souvenir(s), or just play with the juke box(j)" << endl;
+					cin >> activity;
 				}
 				else if (timeDay <= 2300 && timeDay >= 500) {
-					cout << "The cafe is open(c), and it has a juke box(j) ;)" << endl;
+					cout << "The cafe is open(c), and it has a juke box(j)" << endl;
+					cin >> activity;
 				}
 				else {
 					cout << "Sorry nothing is open in murphyville" << endl;
 				}
 			}
-		}
-		if(activity == 'c' || activity == 'C'){
 		
-		//Cafe Menu Selection
-		if (timeDay <= 2000 && timeDay >= 1100) {
-			cout << "Breakfast and Dinner menu" << endl;
+			//Cafe
+			if (activity == 'c' || activity == 'C') {
 
-			switch (food) {
-			case 1:
-				cout << "How many: " << endl;
-				cin >> amtFood;
-				amtBiscuits += amtFood;
-				amtFood = 0;
-				break;
-			case 2:
-				cout << "How many: " << endl;
-				cin >> amtFood;
-				amtCakes += amtFood;
-				amtFood = 0;
-				break;
-			case 3:
-				cout << "How many: " << endl;
-				cin >> amtFood;
-				stockDilloSteak -= amtFood;
-				if (stockDilloSteak < 0) {
-					cout << "Sorry we are out of that item" << endl;
-					break;
-				}
-				amtDilloSteak += amtFood;
-				amtFood = 0;
-				break;
-			case 4:
-				cout << "How many: " << endl;
-				cin >> amtFood;
-				stockSquirrelOnStick -= amtFood;
-				if (stockSquirrelOnStick < 0) {
-					cout << "Sorry we are out of that item" << endl;
-					break;
-				}
-				amtSquirrelOnStick += amtFood;
-				amtFood = 0;
-				break;
-			default:
-				cout << "that is not an available item" << endl;
-				break;
+				//Cafe Menu Selection
+				cout << "How many different items would you like to order?" << endl;
+				cin >> amtItems;
 
+				for (amtItems; amtItems > 0;amtItems--) {
+					if (timeDay <= 2000 && timeDay >= 1100) {
+						cout << "Breakfast and Dinner menu" << endl;
+						
+						
+						cout << "what item number would you like?" << endl;
+						cin >> food;
+						switch (food) {
+						case 1:
+							cout << "How many: " << endl;
+							cin >> amtFood;
+							amtBiscuits += amtFood;
+							amtFood = 0;
+							break;
+						case 2:
+							cout << "How many: " << endl;
+							cin >> amtFood;
+							amtCakes += amtFood;
+							amtFood = 0;
+							break;
+						case 3:
+							cout << "How many: " << endl;
+							cin >> amtFood;
+							stockDilloSteak -= amtFood;
+							if (stockDilloSteak < 0) {
+								cout << "Sorry we are out of that item" << endl;
+								break;
+							}
+							amtDilloSteak += amtFood;
+							amtFood = 0;
+							break;
+						case 4:
+							cout << "How many: " << endl;
+							cin >> amtFood;
+							stockSquirrelOnStick -= amtFood;
+							if (stockSquirrelOnStick < 0) {
+								cout << "Sorry we are out of that item" << endl;
+								break;
+							}
+							amtSquirrelOnStick += amtFood;
+							amtFood = 0;
+							break;
+						default:
+							cout << "that is not an available item" << endl;
+							break;
+
+						}
+
+					}
+					else if (timeDay <= 2300 && timeDay >= 500) {
+						cout << "Breakfast Menu" << endl;
+
+
+						cout << "what item number would you like?" << endl;
+						cin >> food;
+						switch (food) {
+						case 1:
+							cout << "How many: " << endl;
+							cin >> amtFood;
+							amtBiscuits += amtFood;
+							amtFood = 0;
+							break;
+						case 2:
+							cout << "How many: " << endl;
+							cin >> amtFood;
+							amtCakes += amtFood;
+							amtFood = 0;
+							break;
+						default:
+							cout << "that is not an available item" << endl;
+							break;
+						}
+					}
+					else {
+						cout << "We are closed" << endl;
+					}
+				}
+
+				subtotal = amtBiscuits * COSTBISCUITS + amtCakes * COSTCAKES + amtDilloSteak * COSTDILLOSTEAK + amtSquirrelOnStick * COSTSQUIRRELONSTICK;
 			}
 
-		}
-		else if (timeDay <= 2300 && timeDay >= 500) {
-			cout << "Breakfast Menu" << endl;
+			//Souvenir Shop
+			else if (activity == 's' || activity == 'S') {
+				if (weekend) {
+					if (timeDay >= 700 && timeDay <= 2200) {
+						cout << "WELCOME TO THE SOUVENIR STORE" << endl << endl;
+						cout << "We are currently selling:" << endl;
 
-			switch (food) {
-			case 1:
-				cout << "How many: " << endl;
-				cin >> amtFood;
-				amtBiscuits += amtFood;
-				amtFood = 0;
-				break;
-			case 2:
-				cout << "How many: " << endl;
-				cin >> amtFood;
-				amtCakes += amtFood;
-				amtFood = 0;
-				break;
-			default:
-				cout << "that is not an available item" << endl;
-				break;
+					}
+					else {
+						cout << "Sorry we are closed. Come back between 8 AM or 8 PM on weekdays or 7 AM and 10 PM on weekends" << endl;
+					}
+				}
+				else {
+					if (timeDay >= 800 && timeDay <= 2000) {
+						cout << "WELCOME TO THE SOUVENIR STORE" << endl << endl;
+						cout << "We are currently selling:" << endl;
+
+					}
+					else {
+						cout << "Sorry we are closed. Come back between 8 AM or 8 PM on weekdays or 7 AM and 10 PM on weekends" << endl;
+					}
+				}
 			}
-		}
-		else {
-			cout << "We are closed" << endl;
-		}
-		}
-
-	}while(here);
+	}while(staying == 'y' || staying == 'Y');
 	
 	system("pause");
 	return 0;
