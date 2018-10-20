@@ -42,11 +42,11 @@ int stockSquirrelOnStick = 5; // stock of squirrel
 
 float subtotal;
 float total;
-int stars;
+int rating;
 
-const float TIP1 = 0.2; //tip for 1 star
-const float TIP2 = 0.15; //tip for 2 star
-const float TIP3 = 0.1; //tip for 3 star
+const float TIPRATE1 = 0.2; //tip rate for 1 star
+const float TIPRATE2 = 0.15; //tip rate for 2 star
+const float TIPRATE3 = 0.1; //tip rate for 3 star
 
 
 int main() {
@@ -201,6 +201,25 @@ int main() {
 				}
 
 				subtotal = amtBiscuits * COSTBISCUITS + amtCakes * COSTCAKES + amtDilloSteak * COSTDILLOSTEAK + amtSquirrelOnStick * COSTSQUIRRELONSTICK;
+
+				total = subtotal * (1 + CAFETAX); //total before survey tip
+
+				cout << "On a scale of 1-3 how enjoyable was your meal?" << endl;
+				cin >> rating;
+
+				if (rating == 1) {
+					total += total * (1 + TIPRATE1);
+				}
+
+				if (rating == 2) {
+					total += total * (1 + TIPRATE2);
+				}
+
+				if (rating == 3) {
+					total += total * (1 + TIPRATE3);
+				}
+
+				cout << "Must be \"G\"-rated" << endl;
 			}
 
 			//Souvenir Shop
