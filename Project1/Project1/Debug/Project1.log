@@ -1,3 +1,7 @@
 ﻿  Source.cpp
-c:\users\vsemenok\source\repos\project1\project1\source.cpp(27): warning C4305: 'initializing': truncation from 'double' to 'float'
-  Project1.vcxproj -> C:\Users\VSemenok\source\repos\Project1\Debug\Project1.exe
+c:\users\vsemenok\source\repos\project1\project1\source.cpp(28): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\vsemenok\source\repos\project1\project1\source.cpp(48): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\vsemenok\source\repos\project1\project1\source.cpp(49): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\vsemenok\source\repos\project1\project1\source.cpp(50): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\vsemenok\source\repos\project1\project1\source.cpp(114): error C2143: syntax error: missing ';' before 'if'
+c:\users\vsemenok\source\repos\project1\project1\source.cpp(282): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
