@@ -17,7 +17,6 @@ using namespace std;
 
 char staying;
 
-
 string day;
 bool weekend;
 int timeDay;
@@ -49,6 +48,7 @@ const float TIPRATE1 = 0.2; //tip rate for 1 star
 const float TIPRATE2 = 0.15; //tip rate for 2 star
 const float TIPRATE3 = 0.1; //tip rate for 3 star
 
+int jukeCount = -1;
 float jukeMoney; //money put into Jukebox
 int quarters; //amount of 25 cent increments put in
 int seconds; //amount of seconds to play for
@@ -57,18 +57,9 @@ ifstream inFile;
 ofstream outFile;
 
 string song;
+string line;
 
-//song lengths in seconds
-const int lengthOn = 171; //On The Road Again    
-const int lengthLife = 186; //Life is a Highway 
-const int lengthKing = 183; //King of the Road           
-const int lengthCantDrive = 255; //I Cant Drive 55              
-const int lengthEverywhere = 216; // Ive Been Everywhere      
-const int lengthShutUp = 243; // Shut Up and Drive          
-const int lengthAllNight = 177; // I drove all night             
-const int lengthRoadJack = 303; // Hit the Road Jack           
-const int lengthCountryRoadsTakeMeHome = 186; //Country Roads Take Me HOME!    
-const int lengthRoad = 177; // Road to Nowhere              
+float songLength;
 
 int main() {
 	cout << setprecision(2) << fixed; // makes all outputs to two decimal points
@@ -279,16 +270,30 @@ int main() {
 
 				quarters = jukeMoney * 4;
 				seconds = quarters * 180;
-				jukeMoney = 0;
-				int counter = 0;
-				while (getline(inFile,song,' ')) {
-					//inFile >> song;
-					if (song != "") {
+				
+				while (seconds > 0) { //calculates number of songs to play
+					getline(inFile, song, ' '); //gets the output from the file and deliminates from spaces
+					if (song != "") { //checks if the line is blank
+						if (song.length() == 4) { //checks if string is the song length
+							songLength = stof(song); // converts the time played to a float for calculating
+							seconds -= songLength * 60; //decreases seconds left to play
+							jukeCount++; //increases the amount of songs to play
+						}
+					}
+
+				}
+				jukeCount += jukeCount; //doubles amount of songs to play to include the times that need to be cut out of the display
+				
+				inFile.close();
+				
+				inFile.open("Songs.txt");
+				for (jukeCount; jukeCount > 0; jukeCount--) {
+					inFile >> song;
+					if (song.length() != 4) { //checks if string is the song length
 						cout << song << endl;
 						outFile << song << endl;
 					}
 				}
-
 
 			} while (jukeMoney != 0);
 		inFile.close();
