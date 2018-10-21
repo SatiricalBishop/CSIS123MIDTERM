@@ -2,7 +2,8 @@
 Victor Semenok and John Hammons Midterm Project for CSIS 123
 Create a program that guides the user through Murphyville and allows for them to interact with a jukebox, cafe, or shop depending on the time of day and day of the week.
 
-
+Victor did psuedocode, calculations and Jukebox
+John did templates, menu and formatting
 */
 
 
@@ -29,6 +30,20 @@ const float COSTBISCUITS = 5.00;
 const float COSTCAKES = 5.00;
 const float COSTDILLOSTEAK = 5.00;
 const float COSTSQUIRRELONSTICK = 5.00;
+
+const float SHOPTAX = 0.0725;
+const float COSTKEYCHAINS = 0.50;
+const float COSTMAGNETS = 1.00;
+
+int stockKeyChains = 10;
+int stockMagnets = 15;
+int amtKeyChains;
+int amtMagnets;
+int amtBought;
+int bought;
+
+float subtotalShop; // subtotal for shop
+float totalShop; // total cost for shop
 
 int food; // what food is ordered
 int amtFood; // amt of food ordered
@@ -137,6 +152,20 @@ int main() {
 			for (amtItems; amtItems > 0; amtItems--) {
 				if (timeDay <= 2000 && timeDay >= 1100) {
 					cout << "Breakfast and Dinner menu" << endl;
+					cout << endl;
+					cout << "1" << ' ' << "Biscuits and Gravy" << setw(21) << left << setw(21) << right << "$" << COSTBISCUITS << endl; //menu item biscuits
+					cout << "Murphy won't tell you whats in these, you might not want to know." << endl;
+					cout << endl;
+					cout << "2" << ' ' << "Pancakes" << setw(8) << left << setw(31) << right << "$" << COSTCAKES << endl; //menu item pancakes 
+					cout << "Whole wheat pancakes (read as 'dry even with syryp')" << endl;
+					cout << endl;
+					cout << "3" << ' ' << "'Dillo Steak" << setw(12) << left << setw(27) << right << "$" << COSTDILLOSTEAK << endl; //menu item steak
+					cout << "Says it in the name, Armadillo steak." << endl;
+					cout << endl;
+					cout << "4" << ' ' << "Squirrel on a Stick" << setw(19) << left << setw(20) << right << "$" << COSTCAKES << endl; //menu item squirrel
+					cout << "Whole squirrel, bones and all, Murphy says it's good for your teeth." << endl;
+					cout << endl;
+					cout << "what item number would you like?" << endl;
 
 
 					cout << "what item number would you like?" << endl;
@@ -185,6 +214,12 @@ int main() {
 				}
 				else if (timeDay <= 2300 && timeDay >= 500) {
 					cout << "Breakfast Menu" << endl;
+					cout << "1" << "Biscuits and Gravy" << setw(15) << left << setw(5) << "$" << COSTBISCUITS << right << endl; //menu item pancakes
+					cout << "Murphy won't tell you whats in these, you might not want to know." << endl;
+					cout << endl;
+					cout << "2" << "Pancakes" << setw(15) << left << setw(5) << "$" << COSTCAKES << right << endl; //menu item pancakes
+					cout << "Whole wheat pancakes (read as 'dry even with syryp')" << endl;
+					cout << endl;
 
 
 					cout << "what item number would you like?" << endl;
@@ -212,12 +247,14 @@ int main() {
 				}
 			}
 
+			//calculations for cost
 			subtotal = amtBiscuits * COSTBISCUITS + amtCakes * COSTCAKES + amtDilloSteak * COSTDILLOSTEAK + amtSquirrelOnStick * COSTSQUIRRELONSTICK;
 
 			total = subtotal * (1 + CAFETAX); //total before survey tip
 
 			cout << "On a scale of 1-3 how enjoyable was your meal?" << endl;
 			cin >> rating;
+
 
 			if (rating == 1) {
 				total += total * (1 + TIPRATE1);
@@ -231,6 +268,16 @@ int main() {
 				total += total * (1 + TIPRATE3);
 			}
 
+			cout << setw(50) << setfill('_') << " " << setfill(' ');
+			cout << endl;
+			cout << "Biscuits and Gravy:" << ' ' << setw(2) << left << amtBiscuits << setw(29) << right << "$" << (COSTBISCUITS*amtBiscuits) << endl;
+			cout << "Pancakes:" << ' ' << setw(2) << left << amtCakes << setw(39) << right << "$" << (COSTBISCUITS*amtCakes) << endl;
+			cout << "'Dillo Steak:" << ' ' << setw(2) << left << amtDilloSteak << setw(35) << right << "$" << (COSTDILLOSTEAK*amtDilloSteak) << endl;
+			cout << "Squirrel on a Stick:" << ' ' << setw(2) << left << amtSquirrelOnStick << setw(28) << right << "$" << (COSTSQUIRRELONSTICK*amtSquirrelOnStick) << endl;
+			cout << setw(50) << setfill('_') << " " << setfill(' ');
+			cout << endl;
+			cout << setw(25) << left << "TOTAL DUE:" << setw(25) << right << "$" << total << endl; //print out total cost
+
 			cout << "Must be \"G\"-rated" << endl;
 		}
 
@@ -240,8 +287,68 @@ int main() {
 				if (timeDay >= 700 && timeDay <= 2200) {
 					cout << "WELCOME TO THE SOUVENIR STORE" << endl << endl;
 					cout << "We are currently selling:" << endl;
+					
+					cout << "1" << "Keychains" << setw(15) << left << setw(5) << "$" << COSTKEYCHAINS << right << endl; //menu item keychains
+					cout << "Plastic keychains from somewhere called 'Joe's discount offbrands'" << endl;
+					cout << endl;
+					cout << "2" << "Magnets" << setw(15) << left << setw(5) << "$" << COSTMAGNETS << right << endl; //menu item magnets
+					cout << "Made out of a magnet, hotglue, and a crude drawing on notebook paper." << endl;
+					cout << endl;
 
+					cout << "what item number would you like?" << endl;
+					cin >> bought;
+					switch (bought) {
+					case 1:
+						cout << "How many: " << endl;
+						cin >> amtBought;
+						stockKeyChains -= amtBought;
+						if (stockKeyChains < 0) {
+							cout << "Sorry we are out of that item" << endl;
+							break;
+						}
+						amtKeyChains += amtBought;
+						amtBought = 0;
+						break;
+					case 2:
+						cout << "How many: " << endl;
+						cin >> amtBought;
+						stockMagnets -= amtBought;
+						if (stockMagnets < 0) {
+							cout << "Sorry we are out of that item" << endl;
+							break;
+						}
+						amtMagnets += amtBought;
+						amtBought = 0;
+						break;
+					default:
+						cout << "that is not an available item" << endl;
+						break;
+				
+				
 				}
+
+				//cost calculations
+
+					subtotalShop = amtKeyChains * COSTKEYCHAINS + amtMagnets * COSTMAGNETS;
+					total = subtotal * (1 + SHOPTAX);
+				
+				//reciept
+					cout << setw(50) << setfill('_') << " " << setfill(' ');
+					cout << endl;
+					cout << "Keychains:" << ' ' << setw(2) << left << amtBiscuits << setw(29) << right << "$" << (amtKeyChains * COSTKEYCHAINS) << endl;
+					cout << "Magnets:" << ' ' << setw(2) << left << amtCakes << setw(39) << right << "$" << (amtMagnets * COSTMAGNETS) << endl;
+					cout << setw(50) << setfill('_') << " " << setfill(' ');
+					cout << endl;
+					cout << setw(25) << left << "TOTAL DUE:" << setw(25) << right << "$" << totalShop << endl; //print out total cost
+
+				//restock
+				cout << setw(50) << left << "Nightly Restock" << endl;
+				cout << setw(25) << left << "Keychains" << setw(2) << left << amtKeyChains << setw(39) << right << "$" << (amtKeyChains *COSTKEYCHAINS) << endl;
+				cout << setw(25) << left << "Magnets" << setw(2) << left << amtMagnets << setw(39) << right << "$" << (amtMagnets * COSTMAGNETS) << endl;
+				cout << setw(25) << left << "TOTAL DUE:" << setw(25) << right << "$" << (subtotalShop + 50 + 100) << endl; //print out total cost
+
+
+
 				else {
 					cout << "Sorry we are closed. Come back between 8 AM or 8 PM on weekdays or 7 AM and 10 PM on weekends" << endl;
 				}
@@ -251,7 +358,63 @@ int main() {
 					cout << "WELCOME TO THE SOUVENIR STORE" << endl << endl;
 					cout << "We are currently selling:" << endl;
 
-				}
+					cout << "1" << "Keychains" << setw(15) << left << setw(5) << "$" << COSTKEYCHAINS << right << endl; //menu item keychains
+					cout << "Plastic keychains from somewhere called 'Joe's discount offbrands'" << endl;
+					cout << endl;
+					cout << "2" << "Magnets" << setw(15) << left << setw(5) << "$" << COSTMAGNETS << right << endl; //menu item magnets
+					cout << "Made out of a magnet, hotglue, and a crude drawing on notebook paper." << endl;
+					cout << endl;
+
+					cout << "what item number would you like?" << endl;
+					cin >> bought;
+					switch (bought) {
+					case 1:
+						cout << "How many: " << endl;
+						cin >> amtBought;
+						stockKeyChains -= amtBought;
+						if (stockKeyChains < 0) {
+							cout << "Sorry we are out of that item" << endl;
+							break;
+						}
+						amtKeyChains += amtBought;
+						amtBought = 0;
+						break;
+					case 2:
+						cout << "How many: " << endl;
+						cin >> amtBought;
+						stockMagnets -= amtBought;
+						if (stockMagnets < 0) {
+							cout << "Sorry we are out of that item" << endl;
+							break;
+						}
+						amtMagnets += amtBought;
+						amtBought = 0;
+						break;
+					default:
+						cout << "that is not an available item" << endl;
+						break;
+					}
+					//cost calculations
+
+					subtotalShop = amtKeyChains * COSTKEYCHAINS + amtMagnets * COSTMAGNETS;
+					total = subtotal * (1 + SHOPTAX);
+
+					//reciept
+					cout << setw(50) << setfill('_') << " " << setfill(' ');
+					cout << endl;
+					cout << "Keychains:" << ' ' << setw(2) << left << amtBiscuits << setw(29) << right << "$" << (amtKeyChains * COSTKEYCHAINS) << endl;
+					cout << "Magnets:" << ' ' << setw(2) << left << amtCakes << setw(39) << right << "$" << (amtMagnets * COSTMAGNETS) << endl;
+					cout << setw(50) << setfill('_') << " " << setfill(' ');
+					cout << endl;
+					cout << setw(25) << left << "TOTAL DUE:" << setw(25) << right << "$" << totalShop << endl; //print out total cost
+
+					//restock
+					cout << setw(50) << left << "Nightly Restock" << endl;
+					cout << setw(25) << left << "Keychains" << setw(2) << left << amtKeyChains << setw(39) << right << "$" << (amtKeyChains *COSTKEYCHAINS) << endl;
+					cout << setw(25) << left << "Magnets" << setw(2) << left << amtMagnets << setw(39) << right << "$" << (amtMagnets * COSTMAGNETS) << endl;
+					cout << setw(25) << left << "TOTAL DUE:" << setw(25) << right << "$" << (subtotalShop + 50 + 100) << endl; //print out total cost
+
+				
 				else {
 					cout << "Sorry we are closed. Come back between 8 AM or 8 PM on weekdays or 7 AM and 10 PM on weekends" << endl;
 				}

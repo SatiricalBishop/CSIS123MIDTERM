@@ -1,0 +1,8 @@
+﻿  Source.cpp
+c:\users\shrou\desktop\other\new folder\csis123midterm-master(2)\csis123midterm-master\project1\project1\source.cpp(27): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\shrou\desktop\other\new folder\csis123midterm-master(2)\csis123midterm-master\project1\project1\source.cpp(50): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\shrou\desktop\other\new folder\csis123midterm-master(2)\csis123midterm-master\project1\project1\source.cpp(51): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\shrou\desktop\other\new folder\csis123midterm-master(2)\csis123midterm-master\project1\project1\source.cpp(52): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\shrou\desktop\other\new folder\csis123midterm-master(2)\csis123midterm-master\project1\project1\source.cpp(311): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\shrou\desktop\other\new folder\csis123midterm-master(2)\csis123midterm-master\project1\project1\source.cpp(319): warning C4244: '-=': conversion from 'float' to 'int', possible loss of data
+  Project1.vcxproj -> C:\Users\shrou\Desktop\Other\New folder\CSIS123MIDTERM-master(2)\CSIS123MIDTERM-master\Project1\x64\Debug\Project1.exe
