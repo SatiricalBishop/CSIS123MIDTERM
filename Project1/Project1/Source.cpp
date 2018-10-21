@@ -335,8 +335,8 @@ int main() {
 				//reciept
 					cout << setw(50) << setfill('_') << " " << setfill(' ');
 					cout << endl;
-					cout << "Keychains:" << ' ' << setw(2) << left << amtBiscuits << setw(29) << right << "$" << (amtKeyChains * COSTKEYCHAINS) << endl;
-					cout << "Magnets:" << ' ' << setw(2) << left << amtCakes << setw(39) << right << "$" << (amtMagnets * COSTMAGNETS) << endl;
+					cout << "Keychains:" << ' ' << setw(2) << left << amtKeyChains << setw(29) << right << "$" << (amtKeyChains * COSTKEYCHAINS) << endl;
+					cout << "Magnets:" << ' ' << setw(2) << left << amtMagnets << setw(39) << right << "$" << (amtMagnets * COSTMAGNETS) << endl;
 					cout << setw(50) << setfill('_') << " " << setfill(' ');
 					cout << endl;
 					cout << setw(25) << left << "TOTAL DUE:" << setw(25) << right << "$" << totalShop << endl; //print out total cost
@@ -402,8 +402,8 @@ int main() {
 					//reciept
 					cout << setw(50) << setfill('_') << " " << setfill(' ');
 					cout << endl;
-					cout << "Keychains:" << ' ' << setw(2) << left << amtBiscuits << setw(29) << right << "$" << (amtKeyChains * COSTKEYCHAINS) << endl;
-					cout << "Magnets:" << ' ' << setw(2) << left << amtCakes << setw(39) << right << "$" << (amtMagnets * COSTMAGNETS) << endl;
+					cout << "Keychains:" << ' ' << setw(2) << left << amtKeyChains << setw(29) << right << "$" << (amtKeyChains * COSTKEYCHAINS) << endl;
+					cout << "Magnets:" << ' ' << setw(2) << left << amtMagnets << setw(39) << right << "$" << (amtMagnets * COSTMAGNETS) << endl;
 					cout << setw(50) << setfill('_') << " " << setfill(' ');
 					cout << endl;
 					cout << setw(25) << left << "TOTAL DUE:" << setw(25) << right << "$" << totalShop << endl; //print out total cost
